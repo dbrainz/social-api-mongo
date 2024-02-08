@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const { ObjectId } = require("mongoose").Types
-const thoughtSchema = require("./Thought");
+//const thoughtSchema = require("./Thought");
 
 const userSchema = new Schema(
     {
@@ -16,9 +16,11 @@ const userSchema = new Schema(
             required: true,
             match: /.+\@.+\..+/,
         },
-        thoughts: [thoughtSchema],
+        thoughts: [ {type: ObjectId, ref: 'Thought'}],
         friends: [ {type: ObjectId, ref: 'User' }]
     }
 )
 
-module.exports = userSchema;
+const User = model('user', userSchema);
+
+module.exports = User;
