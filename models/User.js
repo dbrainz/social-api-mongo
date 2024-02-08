@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { ObjectId } = require("mongoose").Types
 const thoughtSchema = require("./Thought");
 
 const userSchema = new Schema(
@@ -16,7 +17,7 @@ const userSchema = new Schema(
             match: /.+\@.+\..+/,
         },
         thoughts: [thoughtSchema],
-        friends: [ {type: isObjectIdOrHexString, ref: 'User' }]
+        friends: [ {type: ObjectId, ref: 'User' }]
     }
 )
 
