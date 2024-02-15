@@ -63,8 +63,6 @@ module.exports = {
         }
     },
     async createReaction(req, res) {
-        console.log('Add reaction');
-        console.log(req.body);
         
         try {
             const thought=await Thought.findOneAndUpdate(
@@ -79,15 +77,13 @@ module.exports = {
 
             res.json(thought);
         } catch(err) {
+            console.log(err);
             res.status(500).json(err);
         }
 
     },
     async deleteReaction(req, res) {
         try {
-            console.log('Delete one reaction')
-            console.log(req.params.thoughtId)
-            console.log(req.params.reactionId)
             const thought=await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId},
                 { $pull: { reactions: { reactionId: req.params.reactionId}}},
